@@ -1,0 +1,76 @@
+// Создаем наши модели, которые призма в последствии конвертирует в SQL таблицы и их отношения.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Подключаем базу данных.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//Создаём модели. 
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  roles    Role[]
+
+  // Каждый юзер имеет один профиль (связь 1к1). При удалении профиля, соотвествующий юзер удаляется тоже.
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId Int     @unique
+}
+
+model Profile {
+  id       Int     @id @default(autoincrement())
+  phone    String?
+  address  String?
+  name     String
+  lastName String
+
+  // Каждый профиль ссылается на "своего юзера" (связь 1к1).
+  user User?
+}
+
+model File {
+  id        Int      @id @default(autoincrement())
+  path      String
+  fileName  String
+  mime      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  // Каждый файл может использоваться сразу в нескольких блоках(связь 1 ко многим).
+  blocks        Block[]
+  fileRelations FileRelations[]
+}
+
+// Модель отношений файлов к "местам использования".
+model FileRelations {
+  id           Int    @id @default(autoincrement())
+  file         File   @relation(fields: [fileId], references: [id])
+  fileId       Int    @unique
+  resourceName String
+  resourceId   Int
+}
+
+model Block {
+  id      Int    @id @default(autoincrement())
+  key     String
+  name    String
+  content String
+  group   String
+
+  // Каждый блок может иметь одну картинку (связь 1 к 1).
+  picture   File? @relation(fields: [pictureId], references: [id])
+  pictureId Int?  @unique
+}
+
+// Перечисление возможных ролей.
+enum Role {
+  USER
+  ADMIN
+}
