@@ -14,7 +14,7 @@ async function main() {
           name: 'TestUser1_firstName',
           lastName: 'TestUser1_lastName',
           address: 'TestUser1_address',
-          phone: '+375297777777',
+          phone: '8800555333777',
         },
       },
     },
