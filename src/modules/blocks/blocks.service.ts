@@ -1,8 +1,8 @@
 // Создаём сервис для работы с блоками.
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { File, Prisma } from '@prisma/client';
-import { PrismaException } from 'src/prisma/prisma.helpers';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaException } from '../../prisma/prisma.helpers';
+import { PrismaService } from '../../prisma/prisma.service';
 import { FilesService } from '../files/files.service';
 
 @Injectable()

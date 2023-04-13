@@ -9,8 +9,8 @@ import {
   Delete,
   Body,
 } from '@nestjs/common';
-import { Roles } from 'src/decorators/Roles.decorator';
-import { RoleParam } from 'src/guards/RolesGuard.guard';
+import { Roles } from '../../decorators/Roles.decorator';
+import { RoleParam } from '../../guards/RolesGuard.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ProfilesService } from './profiles.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
@@ -56,6 +56,7 @@ export class ProfilesController {
     resourceParamId: 'id',
     authorField: 'id',
   })
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.profilesService.remove(+id);

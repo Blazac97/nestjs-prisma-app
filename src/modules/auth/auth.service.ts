@@ -1,4 +1,4 @@
-//Создаём сервис авторизации.
+// Создаём сервис авторизации.
 import { Injectable } from '@nestjs/common';
 import { ProfilesService } from '../profiles/profiles.service';
 import { RegisterDto } from './dto/register.dto';
@@ -18,7 +18,7 @@ export class AuthService {
     const userProfile = await this.profilesService.findOneByEmail(email);
     if (userProfile) {
       const { user, ...profileRest } = userProfile;
-      const { password: userHashedPassword, ...userRest } = user;
+      const { password: userHashedPassword, ...userRest } = user!;
       const success = await this.bcrypt.compare(password, userHashedPassword);
       if (success) {
         return { ...profileRest, user: userRest };

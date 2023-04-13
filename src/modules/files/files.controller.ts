@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { Roles } from 'src/decorators/Roles.decorator';
-import { RoleParam } from 'src/guards/RolesGuard.guard';
+import { Roles } from '../../decorators/Roles.decorator';
+import { RoleParam } from '../../guards/RolesGuard.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 // Обрабатываем запросы по указанным эндпоинтам.
 @Controller('files')

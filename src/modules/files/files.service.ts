@@ -1,8 +1,8 @@
 // Создаём сервис для работы с файлами.
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { PrismaException } from 'src/prisma/prisma.helpers';
+import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaException } from '../../prisma/prisma.helpers';
 import { removePhysicalFile, removePhysicalFiles, subtractHours } from './files.utils';
 import { join } from 'path';
 

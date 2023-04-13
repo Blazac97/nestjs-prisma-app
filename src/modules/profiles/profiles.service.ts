@@ -1,8 +1,8 @@
 // Создаём сервис для работы с профилями.
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma, Profile } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { PrismaException } from 'src/prisma/prisma.helpers';
+import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaException } from '../../prisma/prisma.helpers';
 
 @Injectable()
 export class ProfilesService {
@@ -15,6 +15,8 @@ export class ProfilesService {
         user: true,
       },
     });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     delete createdProfile['user']['password'];
     return createdProfile;
   }
@@ -45,7 +47,7 @@ export class ProfilesService {
     });
   }
 
-  //Метод для редактирования профиля.
+  // Метод для редактирования профиля.
   async update(id: number, data: Prisma.ProfileUpdateInput) {
     try {
       const updateProfile = await this.prisma.profile.update({

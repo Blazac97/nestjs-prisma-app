@@ -44,7 +44,7 @@ export class UniqueConstraint implements ValidatorConstraintInterface {
 export function Unique(
   model: string,
   uniqueField: string,
-  exceptField: string = null,
+  exceptField: string | null | undefined = null,
   validationOptions?: ValidationOptions
 ) {
   return function (object: any, propertyName: string) {

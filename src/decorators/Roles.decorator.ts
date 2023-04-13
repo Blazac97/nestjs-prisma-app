@@ -1,6 +1,6 @@
 // Создаём декоратор,который позволяет присваивать роль, необходимую для доступа к эднпоинту.
 import { applyDecorators, SetMetadata, UseGuards } from '@nestjs/common';
-import { RoleParam, RolesGuard } from 'src/guards/RolesGuard.guard';
+import { RoleParam, RolesGuard } from '../guards/RolesGuard.guard';
 
 // Интерфейс
 interface IRolesParams {
